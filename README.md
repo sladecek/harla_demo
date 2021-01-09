@@ -4,10 +4,10 @@
 
 # Introduction
 
-*LegalAge* is a mobile application for age verification in
-zero-knowledge.  Neither the service nor the verifier knows the
-age of the prover but together they can prove that the prover is
-older (or younger) than certain age.
+*LegalAge* is an age-verification service based on zero-knowledge
+ cryptography nad Harmony blockchain technology.  A prover (physical person) can prover their age Neither  the service
+ nor the verifier knows the age of the prover but together they can
+ prove that the prover is older (or younger) than certain age.
 
 The application was created mainly as a demo for zero-knowledge
 technologies. It is not guaranteed that it can be of any usefullness
