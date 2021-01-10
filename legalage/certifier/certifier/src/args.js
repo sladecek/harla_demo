@@ -23,26 +23,13 @@ module.exports.parse = () => {
 	    demandOption: "The photo portrait file  must be provided",
 	    description: 'File name of a portrait photo (jpg, png).'
 	})
-	.option('pfx', {
-	    description: 'File name of a PKCS#12 certificate with a private key to sign the certification.',
-	    default: 'certifier.pfx'
-	})
-	.option('pfx-password', {
-	    description:  'PKCS#12 certificate password.',
-	    type: 'string',
-	    default: '1111'
-	})
 	.option('prover-db', {
 	    description: 'Output file containing prover secrets. To be imported to the mobile app.',
 	    default: 'prover-db.json'
 	})
-	.option('not-before', {
-	    description: 'First day of validity of the certification YYYY-MM-DD.',
-	    default: 'TODAY'
-	})
-	.option('not-after', {
-	    description: 'Last day of validity of the certification YYYY-MM-DD.',
-	    default: 'TODAY+1 year'
+	.option('pki', {
+	    description: 'Input file containing PKI configuration (signing certificate).',
+	    default: 'pki.json'
 	})
 	.option('repo', {
 	    description: 'Input file contating repository configuration.',
@@ -69,13 +56,10 @@ module.exports.parse = () => {
 module.exports.print = (para) => {
     console.log("Date of birth (jd)     :", para.d);
     console.log("Photo                  :", para.p);
-    console.log("Signing certificate    :", para.pfx);
-    console.log("Certificate password   :", para['pfx-password']);
     console.log("Output file            :", para['prover-db']);
-    console.log("Not before             :", para['not-before']);
-    console.log("Not after              :", para['not-after']);
     console.log("Wallet                 :", para['wallet']);
     console.log("Repo                   :", para['repo']);
+    console.log("PKI                    :", para['pki']);
     console.log("Price                  :", para['price']);
     console.log("Payment Harmony        :", para['payment-harmony']);
     console.log("Payment Ethereum       :", para['payment-ethereum']);
