@@ -4,7 +4,7 @@ var chp = require('child_process');
 
 module.exports.computeProverKey = (birthday, photoHash, contract, handler) => {
     console.log("--Invoking prover key computation--");
-    chp.exec("../bin/certifier-zk", [birthday, photoHash, contract], (error, stdout) => {
+    chp.execFile("../bin/certifier-zk", [birthday, photoHash, contract], [], (error, stdout) => {
 	if (error) {
             console.log("Error executing 'certifier-zk'" + error);
 	    throw "";
