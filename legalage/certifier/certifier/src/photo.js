@@ -3,7 +3,6 @@
 const fs = require('fs');
 const sharp = require( "sharp" );
 const crypto = require('crypto');
-//const bigInt = require('big-integer');
 
 module.exports.load = (fileName) => {
     console.log("--Checking photo--");

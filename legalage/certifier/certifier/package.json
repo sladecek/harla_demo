@@ -9,7 +9,9 @@
    "author": "Ladislav Sladecek",
    "license": "MIT",
    "dependencies": {
+      "@harmony-js/contract": "^0.1.56",
       "sharp": "^0.27.0",
+      "tslib": "^2.1.0",
       "yargs": "^16.2.0"
    }
 }
