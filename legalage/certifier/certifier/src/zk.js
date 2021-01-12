@@ -1,6 +1,7 @@
 "use strict";
 
-var chp = require('child_process');
+const fs= require("fs");
+const chp = require('child_process');
 
 module.exports.computeProverKey = (birthday, photoHash, contract, handler) => {
     console.log("--Invoking prover key computation--");
@@ -17,5 +18,43 @@ module.exports.computeProverKey = (birthday, photoHash, contract, handler) => {
 	    throw "";
 	}
 	handler(numbers[0], numbers[1]);
+    });
+}
+
+module.exports.saveProverDb = (para, contractAddrDec, ph, nonce) => {
+    const proverDb = {
+	"birthday": para.d,
+	"contract": contractAddrDec,
+	"photo_hash": ph.sha256.toString(10),
+	"nonce": nonce.toString(10)
+    };
+    const proverDbFile = para['prover-db'];
+    fs.writeFileSync(proverDbFile, JSON.stringify(proverDb));   
+    return proverDbFile;
+}
+
+module.exports.generateCertificationProof = (proverDb, handler) => {
+    console.log("--Invoking certification proof--");
+    const tmpProofResultFile = "../tmp/proof.json";
+    chp.execFile("../bin/prove", [
+	"--older", "0",
+	"--prover-db", proverDb,
+	"--proof", tmpProofResultFile,
+    ], [], (error, stdout) => {
+	if (error) {
+            console.log("Error executing 'prove'" + error);
+	    throw "";
+	}
+
+	const qr = JSON.parse(fs.readFileSync(tmpProofResultFile)).qr;
+	const arr = qr.replace(/[;, [\]]+/g,' ').split(' ');
+	const proof = {
+	    a: [ arr[1], arr[2] ],
+	    b: [ [ arr[3], arr[4] ], [ arr[5], arr[6] ]],
+	    c: [ arr[7], arr[8] ]
+	};
+	
+	console.log(proof);
+	handler(proof);
     });
 }

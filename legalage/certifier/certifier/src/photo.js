@@ -17,5 +17,5 @@ module.exports.load = (fileName) => {
     });
     const hash = BigInt("0x"+crypto.createHash("sha256").update(buf).digest('hex')).toString(10);
     console.log("Photo hash (dec)       : " + hash);
-    return { "sha256": hash, "img": buf.toString('base64')};
+    return { "sha256": hash };
 }

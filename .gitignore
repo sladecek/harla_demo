@@ -104,3 +104,7 @@ dist
 .tern-port
 
 *~
+/legalage/certifier/certifier/proof-qr.jpg
+/legalage/certifier/certifier/proof.json
+/legalage/certifier/certifier/prover-db.json
+/legalage/certifier/tmp/
