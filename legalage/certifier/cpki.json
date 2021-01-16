@@ -1,0 +1,5 @@
+{
+    "signer": "../test-certs/test-cert-2021-01-15.pem",
+    "key": "../test-certs/test-cert-2021-01-15.key",
+    "password":"1111"
+}

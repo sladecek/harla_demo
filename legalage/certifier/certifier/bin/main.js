@@ -10,6 +10,11 @@ const zk = require("../src/zk");
 const pki = require("../src/pki");
 const repo = require("../src/repo");
 
+const bigint_le = (s0x) => {
+    const rev = Buffer.from(s0x.substr(2),'hex').reverse();
+    return BigInt('0x' + rev.toString('hex')).toString(10);
+};
+
 const main = () => {
     const para = args.parse();
     args.print(para); 
@@ -21,7 +26,8 @@ const main = () => {
     const ph = photo.load(para.p);
     harmony.deployContract(walletCfg, ph.sha256, (contractAddr) => {
 	console.log("ContractAddress       :", contractAddr);
-	const contractAddrDec = BigInt(contractAddr).toString(10)
+
+	const contractAddrDec = bigint_le(contractAddr);
 	console.log("ContractAddress       :", contractAddrDec);
 	zk.computeProverKey(para.d, ph.sha256, contractAddrDec, (nonce, proverKey) => {
 	    console.log("Nonce (secret key)   :", nonce);
@@ -30,24 +36,16 @@ const main = () => {
 	    const workFile = '../tmp/'+contractAddr;
 	    pki.signPhoto(pkiCfg, photoWithKey, workFile, () => {
 		const ext = path.extname(para.p);
-		repo.upload(repoCfg, para.p, "photo/" + contractAddr + "." + ext, () => {
+		repo.upload(repoCfg, para.p, "photo/" + contractAddr  + ext, () => {
 		    repo.upload(repoCfg, workFile + ".txt", "signature/" + contractAddr + ".txt", () => {
 			const proverDbFile = zk.saveProverDb(para, contractAddrDec, ph, nonce);
-			zk.generateCertificationProof(proverDbFile, (proof) => {
-			    harmony.upload_feedback(walletCfg, contractAddr, ph.sha256, contractAddrDec, proverKey, proof, () => { 
-				console.log("-----FINISHED----");
-				process.exit(0);
-			    }).catch((error) => {
-				console.error(error);
-			    });
-			});
+			console.log("-----FINISHED----");
+			process.exit(0);
 		    });
 		});
 	    });
 	});
-    });
-    
-    
+    });   
 };
 
 main();

@@ -1,0 +1,8 @@
+{
+    "host": "ftp5.webzdarma.cz",
+    "port": 21,
+    "user": "legalage.wz.cz", 
+    "pass": "Legalage1234" ,
+    "photo_url":"http://legalage.wz.cz/photo/",
+    "signature_url":"http://legalage.wz.cz/signature/"
+}

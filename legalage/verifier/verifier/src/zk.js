@@ -11,7 +11,6 @@ module.exports.computeProverKey = (birthday, photoHash, contract, handler) => {
 	    throw "";
 	}
         const result = stdout.toString();
-	console.log(result); // TODO smazat
 	const numbers = result.split(' ').map((s)=>{return BigInt(s);})
 	if (numbers.length != 2 || !numbers[0] || !numbers[1]) {
             console.log("Internal error parsing result of 'certifier-zk'");
@@ -33,28 +32,15 @@ module.exports.saveProverDb = (para, contractAddrDec, ph, nonce) => {
     return proverDbFile;
 }
 
-module.exports.generateCertificationProof = (proverDb, handler) => {
-    console.log("--Invoking certification proof--");
-    const tmpProofResultFile = "../tmp/proof.json";
-    chp.execFile("../bin/prove", [
-	"--older", "0",
-	"--prover-db", proverDb,
-	"--proof", tmpProofResultFile,
-    ], [], (error, stdout) => {
+module.exports.verifyProof = (qrJsonFile, photoHash, proverKey, handler) => {
+    console.log("--Invoking proof verification--");
+    chp.execFile("../bin/verifier-zk", [qrJsonFile, photoHash, proverKey], [], (error, stdout) => {
 	if (error) {
-            console.log("Error executing 'prove'" + error);
+            console.log("Error executing 'verifier-zk'" + error);
 	    throw "";
 	}
-
-	const qr = JSON.parse(fs.readFileSync(tmpProofResultFile)).qr;
-	const arr = qr.replace(/[;, [\]]+/g,' ').split(' ');
-	const proof = {
-	    a: [ arr[1], arr[2] ],
-	    b: [ [ arr[3], arr[4] ], [ arr[5], arr[6] ]],
-	    c: [ arr[7], arr[8] ]
-	};
-	
-	console.log(proof);
-	handler(proof);
+        const result = stdout.toString();
+	handler(Number(result));
     });
 }
+

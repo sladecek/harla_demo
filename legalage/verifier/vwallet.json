@@ -1,0 +1,6 @@
+{
+    "gasPrice1": "0x3B9ACA00",
+    "gasPrice2": 1000000000,
+    "gasLimit": 21000,
+    "privateKey" : "c7f8e43c2a1ba2a7a7631020c2c2e23b4a9778274400546a25c3dd6bbd12d22a"
+}

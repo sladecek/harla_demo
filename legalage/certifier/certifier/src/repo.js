@@ -8,7 +8,7 @@ module.exports.upload = (cfg, src, dest, handler) => {
 
     var buf = fs.readFileSync(src);
     const ftp = new jsftp({...cfg});
-    ftp.put(buf, "/htdocs/"+dest, err => {
+    ftp.put(buf, dest, err => {
 	if (err) {
 	    console.log("File transferr error "+err);
 	    throw "";

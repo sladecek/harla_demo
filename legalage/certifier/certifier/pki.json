@@ -1,5 +1,0 @@
-{
-    "signer": "../test-certs/test-cert-2020-12-16.cer",
-    "key": "../test-certs/test-cert-2020-12-16.key",
-    "password":"1111"
-}

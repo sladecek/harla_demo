@@ -46,15 +46,8 @@ module.exports.generateCertificationProof = (proverDb, handler) => {
 	    throw "";
 	}
 
-	const qr = JSON.parse(fs.readFileSync(tmpProofResultFile)).qr;
-	const arr = qr.replace(/[;, [\]]+/g,' ').split(' ');
-	const proof = {
-	    a: [ arr[1], arr[2] ],
-	    b: [ [ arr[3], arr[4] ], [ arr[5], arr[6] ]],
-	    c: [ arr[7], arr[8] ]
-	};
-	
-	console.log(proof);
-	handler(proof);
+	const qr = JSON.parse(fs.readFileSync(tmpProofResultFile));
+	console.log(qr.proof);
+	handler(qr.proof);
     });
 }

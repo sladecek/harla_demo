@@ -11,8 +11,8 @@ module.exports.parse = () => {
 	    description: 'Date of birth of the prover in YYYY-MM-DD format.'
 	})
 	.coerce('d', (arg) => {
-	    const jd = Date.parse(arg)/86400000 + 244058;
-	    if (arg.length != 10 || jd < 222222 || jd > 300000) {
+	    const jd = Date.parse(arg)/86400000 + 2440587;
+	    if (arg.length != 10 || jd < 2415020 || jd > 2469807) {
 		console.log("Date must be in YYYY-MM-DD format.");
 		throw {};
 	    }
@@ -29,7 +29,7 @@ module.exports.parse = () => {
 	})
 	.option('pki', {
 	    description: 'Input file containing PKI configuration (signing certificate).',
-	    default: 'pki.json'
+	    default: 'cpki.json'
 	})
 	.option('repo', {
 	    description: 'Input file contating repository configuration.',
@@ -38,16 +38,6 @@ module.exports.parse = () => {
 	.option('wallet', {
 	    description: 'Input file contating wallet configuration.',
 	    default: 'cwallet.json'
-	})
-	.option('price', {
-	    description: 'Service fee to be demanded from the certifier.',
-	    default: 0
-	})
-	.option('payment-harmony', {
-	    description: 'Address for the service fee (Harmony).',
-	})
-	.option('payment-ethereum', {
-	    description: 'Address for the service fee (Ethereum).',
 	})
 	.argv
     
@@ -60,8 +50,4 @@ module.exports.print = (para) => {
     console.log("Wallet                 :", para['wallet']);
     console.log("Repo                   :", para['repo']);
     console.log("PKI                    :", para['pki']);
-    console.log("Price                  :", para['price']);
-    console.log("Payment Harmony        :", para['payment-harmony']);
-    console.log("Payment Ethereum       :", para['payment-ethereum']);
-    
 }

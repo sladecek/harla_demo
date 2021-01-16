@@ -108,3 +108,4 @@ dist
 /legalage/certifier/certifier/proof.json
 /legalage/certifier/certifier/prover-db.json
 /legalage/certifier/tmp/
+legalage/verifier/tmp/

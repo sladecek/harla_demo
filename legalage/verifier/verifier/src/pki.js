@@ -27,3 +27,20 @@ module.exports.signPhoto = (cfg, photoWithKey, outputFile, handler) => {
 	handler();
     });
 }
+
+module.exports.validateSignature = (cfg, signedFile, outputFile, handler) => {
+    console.log("--PKI signature validation--");
+    chp.execFile("openssl", [
+	"cms",
+	"-verify",
+	"-in", signedFile,
+	"-out", outputFile,
+	"-CAfile", cfg.caFile
+    ], [], (error, stdout) => {
+	if (error) {
+	    console.log("Error executing 'openssl'" + error);
+	    throw "";
+	}
+	handler();
+    });
+}

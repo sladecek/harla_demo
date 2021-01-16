@@ -15,7 +15,13 @@ module.exports.load = (fileName) => {
 	    throw "";
 	}
     });
-    const hash = BigInt("0x"+crypto.createHash("sha256").update(buf).digest('hex')).toString(10);
+    var hexStr = crypto.createHash("sha256").update(buf).digest('hex');
+    console.log(hexStr);
+    if (hexStr.length > 24) {
+	hexStr = hexStr.substring(hexStr.length - 24);
+    }
+    console.log(hexStr);
+    const hash = BigInt("0x"+hexStr).toString(10);
     console.log("Photo hash (dec)       : " + hash);
     return { "sha256": hash };
 }
