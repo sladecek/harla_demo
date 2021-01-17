@@ -5,24 +5,15 @@
 # Introduction
 
 *LegalAge* is an age-verification service based on zero-knowledge
- cryptography nad Harmony blockchain technology.  A prover (physical person) can prover their age Neither  the service
- nor the verifier knows the age of the prover but together they can
- prove that the prover is older (or younger) than certain age.
+ cryptography nad Harmony blockchain technology.  A prover (physical
+ person) can prover their age Neither the service nor the verifier
+ knows the age of the prover but together they can prove that the
+ prover is older (or younger) than certain age.
 
 The application was created mainly as a demo for zero-knowledge
 technologies. It is not guaranteed that it can be of any usefullness
 in any practical situation.
 
-Imagine a  young-looking woman, who wants to order an alcoholic
-beverage in a bar. In order to prove its age to the barkeeper, she
-must show her ID with a name (and possibly an address) exposing
-herself to the danger of stalking. Using our application, she can
-prove the age anonymously instead. Similarly, an old-looking student
-may want to get anonymously a discounted admission to a museum or a
-good-looking lady in her seventies wants to get a discount for people
-over fifty without telling her real age. The use of the application
-for verifying the age of consent for sexual activities is left on the
-phantasy of the reader.
 
 The application works with four parties: the *prover* is the person
 who wants to prove their age. Entering the bar, they start the

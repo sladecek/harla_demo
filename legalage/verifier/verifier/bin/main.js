@@ -13,14 +13,12 @@ const repo = require("../src/repo");
 const main = () => {
     const para = args.parse();
     args.print(para); 
-    console.log(para);
     const walletCfg = JSON.parse(fs.readFileSync(para.wallet));
     const pkiCfg = JSON.parse(fs.readFileSync(para.pki));
     const repoCfg = JSON.parse(fs.readFileSync(para.repo));
 
     console.log("Parsing proof");
     const proof = JSON.parse(fs.readFileSync(para.qr));
-    console.log(proof);
     const contract = proof.contract;
 
     const photoTmpFile = "../tmp/tmp.photo";
